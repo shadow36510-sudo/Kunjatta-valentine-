@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Valentine's Day Kunjatta 😚💗</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+        :root { --pink-dark: #ff4d6d; --pink-mid: #ff758f; --neon-pink: #ff1493; --glass: rgba(255, 255, 255, 0.1); }
+        body { margin: 0; background: radial-gradient(circle at top, #1a0a0e 0%, #3a0a1a 100%); font-family: 'Georgia', serif; overflow-x: hidden; color: #ffb7c5; }
+        .valentine-banner { padding-top: 50px; text-align: center; position: relative; z-index: 10; }
+        .main-title { font-size: 2.8rem; color: #fff; text-shadow: 0 0 10px var(--neon-pink); font-family: 'Brush Script MT', cursive; animation: floatTitle 3s ease-in-out infinite; margin: 0; }
+        @keyframes floatTitle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .showroom { display: flex; flex-direction: column; align-items: center; padding: 20px 20px 160px 20px; gap: 40px; }
+        .card { width: 100%; max-width: 400px; background: var(--glass); backdrop-filter: blur(12px); border-radius: 30px; padding: 20px; border: 1px solid rgba(255, 20, 147, 0.3); text-align: center; box-sizing: border-box; }
+        /* 3D BOOK CSS */
+        .book-wrapper { perspective: 1000px; display: flex; justify-content: center; padding: 20px 0; }
+        .book { width: 140px; height: 180px; position: relative; transform-style: preserve-3d; animation: autoFlip 4s ease-in-out infinite alternate; }
+        .book-cover, .book-page { position: absolute; width: 100%; height: 100%; border-radius: 0 10px 10px 0; display: flex; align-items: center; justify-content: center; backface-visibility: hidden; transform-origin: left; }
+        .book-cover { background: linear-gradient(45deg, #ff4d6d, #ff1493); color: white; z-index: 2; border-left: 4px solid #800a20; font-weight: bold; }
+        .book-page { background: #fff0f3; color: #333; z-index: 1; padding: 15px; font-size: 0.8rem; transform: rotateY(0deg); }
+        @keyframes autoFlip { 0%, 30% { transform: rotateY(0deg); } 100% { transform: rotateY(-110deg); } }
+        model-viewer { width: 100%; height: 280px; }
+        .label { display: block; margin-top: 15px; font-weight: bold; color: var(--pink-mid); font-size: 1.1rem; }
+        .heart-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .floating-emoji { position: absolute; animation: floatMove 8s linear infinite; opacity: 0; }
+        @keyframes floatMove { 0% { transform: translateY(110vh); opacity: 0; } 15% { opacity: 0.6; } 100% { transform: translateY(-10vh); opacity: 0; } }
+        .controls { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 200; }
+        .toggle-btn { width: 65px; height: 65px; border-radius: 50%; border: 2px solid var(--neon-pink); background: rgba(0,0,0,0.8); font-size: 30px; display: flex; align-items: center; justify-content: center; color: white; border: none; outline: none; }
+        .message-fly { position: fixed; left: 50%; transform: translateX(-50%); font-weight: 900; z-index: 1000; animation: luxuryFly 3s ease-out forwards; font-size: 1.8rem; text-shadow: 0 0 10px #ff1493; }
+        @keyframes luxuryFly { 0% { bottom: 80px; opacity: 0; } 20% { opacity: 1; } 100% { bottom: 70vh; opacity: 0; } }
+    </style>
+</head>
+<body>
+    <div class="heart-bg" id="heartContainer"></div>
+    <div class="valentine-banner">
+        <h1 class="main-title">Happy Valentine's Day</h1>
+        <p style="color: var(--pink-mid);">My Dearest Kunjatta 💕</p>
+    </div>
+    <div class="showroom">
+        <div class="card">
+            <div class="book-wrapper"><div class="book"><div class="book-cover">Our Story 📖</div><div class="book-page">Distance means nothing when someone means everything. I love you! 💖</div></div></div>
+            <span class="label">The Story of Us ✨</span>
+        </div>
+        <div class="card">
+            <model-viewer src="https://modelviewer.dev/shared-assets/models/Cake.glb" auto-rotate camera-controls></model-viewer>
+            <span class="label">Something Sweet 🍰💗</span>
+        </div>
+        <div class="card">
+            <model-viewer src="https://modelviewer.dev/shared-assets/models/Flower.glb" auto-rotate camera-controls></model-viewer>
+            <span class="label">For My Queen 🌷✨</span>
+        </div>
+    </div>
+    <div class="controls">
+        <button class="toggle-btn" onclick="triggerLove()">❤️</button>
+        <button class="toggle-btn" onclick="triggerKiss()">😚</button>
+    </div>
+    <script>
+        const container = document.getElementById('heartContainer');
+        const emojis = ['💗', '💖', '🍫', '✨', '💝'];
+        function createHeart() {
+            const el = document.createElement('div');
+            el.className = 'floating-emoji';
+            el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            container.appendChild(el);
+            setTimeout(() => el.remove(), 8000);
+        }
+        setInterval(createHeart, 400);
+        function triggerLove() { createFlyingText("i love you babyy 🥹💗", "#ff4d6d"); }
+        function triggerKiss() { createFlyingText("umwaah 😚💗", "#ff1493"); }
+        function createFlyingText(text, color) {
+            const msg = document.createElement('div');
+            msg.className = 'message-fly';
+            msg.innerText = text;
+            msg.style.color = color;
+            document.body.appendChild(msg);
+            setTimeout(() => msg.remove(), 3000);
+        }
+    </script>
+</body>
+          </html>
