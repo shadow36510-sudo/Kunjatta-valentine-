@@ -21,158 +21,60 @@
             color: #ffb7c5; 
         }
         
-        .valentine-banner { 
-            padding: 40px 10px; 
-            text-align: center; 
-            position: relative; 
-            z-index: 10; 
-        }
-
-        .main-title { 
-            font-size: 2.5rem; 
-            color: #fff; 
-            text-shadow: 0 0 10px var(--neon-pink); 
-            font-family: 'Brush Script MT', cursive; 
-            margin: 0; 
-        }
+        .valentine-banner { padding: 40px 10px; text-align: center; }
+        .main-title { font-size: 2.5rem; color: #fff; text-shadow: 0 0 10px var(--neon-pink); font-family: 'Brush Script MT', cursive; margin: 0; }
         
-        .showroom { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            padding: 10px 20px 120px 20px; 
-            gap: 30px; 
-        }
+        .showroom { display: flex; flex-direction: column; align-items: center; padding: 10px 20px 120px 20px; gap: 35px; }
         
-        /* CARD FIX: Ensuring enough room for 3D and Book */
         .card { 
-            width: 100%; 
-            max-width: 380px; 
-            background: var(--glass); 
-            backdrop-filter: blur(15px); 
-            border-radius: 25px; 
-            padding: 25px; 
-            border: 1px solid rgba(255, 20, 147, 0.4); 
-            text-align: center; 
-            box-sizing: border-box; 
-            min-height: 420px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center;
-            position: relative;
+            width: 100%; max-width: 380px; background: var(--glass); backdrop-filter: blur(15px); 
+            border-radius: 25px; padding: 25px; border: 1px solid rgba(255, 20, 147, 0.4); 
+            text-align: center; box-sizing: border-box; min-height: 420px; 
+            display: flex; flex-direction: column; justify-content: center; position: relative;
         }
 
-        /* INTERACTIVE BOOK LOGIC */
-        .book-wrapper { 
-            perspective: 1000px; 
-            display: flex; 
-            justify-content: center; 
-            padding: 30px 0;
-            cursor: pointer;
-        }
-
-        .book { 
-            width: 150px; 
-            height: 200px; 
-            position: relative; 
-            transform-style: preserve-3d; 
-            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1); 
-        }
-
-        /* When the 'open' class is added via JS, the book flips */
-        .book.open { 
-            transform: rotateY(-140deg); 
-        }
+        /* FIXED BOOK CSS */
+        .book-wrapper { perspective: 1000px; display: flex; justify-content: center; padding: 30px 0; cursor: pointer; }
+        .book { width: 150px; height: 200px; position: relative; transform-style: preserve-3d; transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1); }
+        .book.open { transform: rotateY(-150deg); }
 
         .book-cover, .book-page { 
-            position: absolute; 
-            width: 100%; 
-            height: 100%; 
-            border-radius: 0 10px 10px 0; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            backface-visibility: hidden; 
-            transform-origin: left; 
+            position: absolute; width: 100%; height: 100%; border-radius: 0 10px 10px 0; 
+            display: flex; align-items: center; justify-content: center; transform-origin: left; 
+            box-sizing: border-box;
         }
 
         .book-cover { 
-            background: linear-gradient(45deg, #ff4d6d, #ff1493); 
-            color: white; 
-            z-index: 2; 
-            border-left: 5px solid #800a20; 
-            font-weight: bold; 
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.5); 
-            font-size: 1.2rem;
+            background: linear-gradient(45deg, #ff4d6d, #ff1493); color: white; 
+            z-index: 5; font-weight: bold; border-left: 5px solid #800a20; 
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5); backface-visibility: hidden;
         }
 
         .book-page { 
-            background: #fff0f3; 
-            color: #333; 
-            z-index: 1; 
-            padding: 20px; 
-            font-size: 0.9rem; 
-            text-align: center; 
-            transform: rotateY(0deg); 
-            box-sizing: border-box; 
-            font-weight: bold; 
-            border: 1px solid #ddd;
+            background: #fff0f3; color: #333; z-index: 1; padding: 20px; 
+            font-size: 0.9rem; text-align: center; font-weight: bold;
+            box-shadow: inset 3px 0 10px rgba(0,0,0,0.1);
         }
 
-        /* 3D MODEL SPACING */
-        model-viewer { 
-            width: 100%; 
-            height: 300px; 
-            margin: 0 auto;
-        }
+        model-viewer { width: 100%; height: 300px; margin: 0 auto; }
+        .label { display: block; margin-top: 15px; font-weight: bold; color: var(--pink-mid); font-size: 1.2rem; }
 
-        .label { 
-            display: block; 
-            margin-top: 15px; 
-            font-weight: bold; 
-            color: var(--pink-mid); 
-            font-size: 1.2rem; 
-            text-shadow: 1px 1px 2px #000; 
-        }
-
-        /* BACKGROUND HEARTS */
         .heart-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
         .floating-emoji { position: absolute; animation: floatMove 6s linear infinite; opacity: 0; }
-        @keyframes floatMove { 
-            0% { transform: translateY(110vh); opacity: 0; } 
-            15% { opacity: 0.7; } 
-            100% { transform: translateY(-10vh); opacity: 0; } 
-        }
+        @keyframes floatMove { 0% { transform: translateY(110vh); opacity: 0; } 100% { transform: translateY(-10vh); opacity: 0; } }
         
-        /* CONTROLS */
         .controls { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 200; }
-        .toggle-btn { 
-            width: 70px; height: 70px; border-radius: 50%; 
-            background: rgba(0,0,0,0.8); font-size: 35px; 
-            border: 2px solid var(--neon-pink); color: white; 
-            display: flex; align-items: center; justify-content: center; 
-            box-shadow: 0 0 15px var(--neon-pink);
-        }
+        .toggle-btn { width: 70px; height: 70px; border-radius: 50%; background: rgba(0,0,0,0.8); font-size: 35px; border: 2px solid var(--neon-pink); color: white; display: flex; align-items: center; justify-content: center; }
         
-        /* FLYING TEXT */
-        .message-fly { 
-            position: fixed; left: 50%; transform: translateX(-50%); 
-            font-weight: 900; z-index: 1000; animation: luxuryFly 3s ease-out forwards; 
-            font-size: 2rem; text-shadow: 0 0 10px #ff1493; pointer-events: none; 
-        }
-        @keyframes luxuryFly { 
-            0% { bottom: 100px; opacity: 0; } 
-            20% { opacity: 1; } 
-            100% { bottom: 80vh; opacity: 0; } 
-        }
+        .message-fly { position: fixed; left: 50%; transform: translateX(-50%); font-weight: 900; z-index: 1000; animation: luxuryFly 3s ease-out forwards; font-size: 2rem; text-shadow: 0 0 10px #ff1493; pointer-events: none; }
+        @keyframes luxuryFly { 0% { bottom: 100px; opacity: 0; } 100% { bottom: 80vh; opacity: 0; } }
     </style>
 </head>
 <body>
     <div class="heart-bg" id="heartContainer"></div>
-    
     <div class="valentine-banner">
         <h1 class="main-title">Happy Valentine's Day</h1>
-        <p style="color: #fff; letter-spacing: 2px; margin-top: 10px;">FOR MY KUNJATTA 💕</p>
+        <p style="color: #fff; letter-spacing: 2px;">FOR MY KUNJATTA 💕</p>
     </div>
 
     <div class="showroom">
@@ -181,21 +83,26 @@
                 <div class="book" id="valentineBook">
                     <div class="book-cover">Tap to Open 📖</div>
                     <div class="book-page">
-                        "Distance is just a test to see how far love can travel. You're my favorite person, today and always!" 💖
+                        "Distance is just a test to see how far love can travel. You are my favorite person, today and always!" 💖
                     </div>
                 </div>
             </div>
-            <span class="label">Our Story ✨ (Tap the Book)</span>
+            <span class="label">Our Story ✨ (Tap Me)</span>
         </div>
 
         <div class="card">
-            <model-viewer src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" auto-rotate camera-controls shadow-intensity="1"></model-viewer>
-            <span class="label">For Our Adventures 🏎️💨</span>
+            <model-viewer src="bmw_m5.glb" auto-rotate camera-controls shadow-intensity="1"></model-viewer>
+            <span class="label">For Our Future Rides 🏎️💨</span>
         </div>
 
         <div class="card">
-            <model-viewer src="https://modelviewer.dev/shared-assets/models/Flower.glb" auto-rotate camera-controls shadow-intensity="1"></model-viewer>
-            <span class="label">Flowers for My Queen 🌷✨</span>
+            <model-viewer src="chocolate.glb" auto-rotate camera-controls shadow-intensity="1"></model-viewer>
+            <span class="label">Something Sweet 🍫💗</span>
+        </div>
+
+        <div class="card">
+            <model-viewer src="tulips.glb" auto-rotate camera-controls shadow-intensity="1"></model-viewer>
+            <span class="label">Flowers for You 🌷✨</span>
         </div>
     </div>
 
@@ -205,15 +112,9 @@
     </div>
 
     <script>
-        // FUNCTION TO OPEN/CLOSE THE BOOK
-        function toggleBook() {
-            const book = document.getElementById('valentineBook');
-            book.classList.toggle('open');
-        }
-
-        // BACKGROUND HEARTS LOGIC
+        function toggleBook() { document.getElementById('valentineBook').classList.toggle('open'); }
         const container = document.getElementById('heartContainer');
-        const emojis = ['💗', '💖', '✨', '💝', '🌸'];
+        const emojis = ['💗', '💖', '✨', '💝'];
         function createHeart() {
             const el = document.createElement('div');
             el.className = 'floating-emoji';
@@ -224,8 +125,6 @@
             setTimeout(() => el.remove(), 6000);
         }
         setInterval(createHeart, 450);
-
-        // BUTTON INTERACTION LOGIC
         function triggerLove() { createFlyingText("i love you babyy 🥹💗", "#ff4d6d"); }
         function triggerKiss() { createFlyingText("umwaah 😚💗", "#ff1493"); }
         function createFlyingText(text, color) {
@@ -238,4 +137,4 @@
         }
     </script>
 </body>
-    </html>
+                </html>
